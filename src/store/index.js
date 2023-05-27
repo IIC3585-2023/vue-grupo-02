@@ -3,7 +3,8 @@ import { browserLocalPersistence, setPersistence, getAuth, signInWithPopup, Goog
 export default createStore({
   state: {
     loading: false,
-    user: null
+    user: null,
+    team: null
   },
   getters: {
   },
@@ -14,32 +15,33 @@ export default createStore({
     setUser(state, payload) {
       state.user = payload;
     },
+    setTeam(state, payload) {
+      state.team = payload;
+    }
+
   },
   actions: {
     async signIn(context) {
-      context.commit('setLoading', true);
       const auth = getAuth();
       await setPersistence(auth, browserLocalPersistence);
       const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({
+        prompt: 'select_account'
+      });
       try {
         const res = await signInWithPopup(auth, provider);
         context.commit('setUser', res.user);
-        context.commit('setLoading', false);
       } catch (error) {
         console.log(error);
-        context.commit('setLoading', false);
       }
     },
     async signOut(context) {
-      context.commit('setLoading', true);
       const auth = getAuth();
       try {
         await signOut(auth);
         context.commit('setUser', null);
-        context.commit('setLoading', false);
       } catch (error) {
         console.log(error);
-        context.commit('setLoading', false);
       }
     }
   },
