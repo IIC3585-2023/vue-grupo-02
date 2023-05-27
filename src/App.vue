@@ -3,30 +3,34 @@
     <title>Pokedex</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
-  <div>
+  <div clas="app">
     <NavBar/>
-    <div class="app">
+    <div class="main-container">
       <router-view v-if="!loading"/>
       <div v-if="loading" class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
+    <FooterComponent/>
   </div>
 </template>
 
 <script>
 
-import NavBar from './components/NavBar.vue';
 import { onAuthStateChanged } from "firebase/auth";
 import { getAuth } from "firebase/auth";
-import db from '@/integrations/firebase'
 import { onSnapshot, setDoc, doc } from 'firebase/firestore'
 import { mapMutations, mapState } from 'vuex';
+import db from '@/integrations/firebase';
+import NavBar from '@/components/NavBar.vue';
+import FooterComponent from "./components/FooterComponent.vue";
+
 
 export default {
   name: 'App',
   components: {
     NavBar,
+    FooterComponent
   },
   methods: {
     ...mapMutations(['setUser', 'setTeam', 'setLoading']),
@@ -61,7 +65,7 @@ export default {
 </script>
 
 <style>
-.app {
+.main-container {
   font-family: 'Poppins';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -72,5 +76,12 @@ export default {
   justify-content: center;
   min-height: 80vh;
   min-width: 100vw;
+  padding: 1rem;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 90vh;
 }
 </style>
