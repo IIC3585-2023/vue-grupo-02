@@ -81,7 +81,7 @@ export default {
 .nav-item {
     cursor: pointer;
     font-family: 'Poppins';
-    font-size: 20px;
+    font-size: 1.5rem;
     font-weight: 600;
     align-items: center;
     display: flex;
@@ -90,7 +90,7 @@ export default {
 .navbar-brand {
     cursor: pointer;
     color: white;
-    font-size: 50px;
+    font-size: 2.5rem !important; 
     font-weight: 600;
     font-family: 'Poppins';
     cursor: pointer;
