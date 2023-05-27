@@ -2,11 +2,11 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" @click="redirect">
+            <a class="navbar-brand" @click="redirect('home')">
             <img :src="require('@/assets/logo.png')"
             alt="" width="60" height="60" class="d-inline-block align-text-top">
             </a>
-            <a class="navbar-brand" @click="redirect" style="color: white;">
+            <a class="navbar-brand" @click="redirect('home')" style="color: white;">
                 Pokedex
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,7 +15,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" @click="redirect('home')">Home</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
@@ -23,18 +23,18 @@
                 <li class="nav-item search-bar">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 </li>
-                <li v-if="user" class="nav-item dropdown">
+                <li v-if="user && !loading" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img :src="user.photoURL" alt="Profile" class="profile-img">
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" @click="redirect('profile')">Profile</a></li>
                         <li><a class="dropdown-item" href="#">Another action</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" @click="logout">Log Out</a></li>
                     </ul>
                 </li>
-                <li v-if="!user" class="nav-item dropdown">
+                <li v-if="!user && !loading" class="nav-item dropdown">
                     <button class="btn btn-light" @click="login">Sign In</button>
                 </li>
             </ul>
@@ -55,7 +55,11 @@ export default {
 		},
 		async logout() {
 			this.signOut()
+			this.redirect('home')
 		},
+		redirect(componentName, props={}) {
+			this.$router.push({ name: componentName, props })
+		}
 	},
 	computed: {
 		...mapState(['user', 'loading']),
@@ -92,6 +96,13 @@ export default {
     cursor: pointer;
 }
 
+.search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1rem;
+}
+
 .dropdown {
     margin-left: auto;
     margin-right: 2rem;
@@ -101,12 +112,6 @@ export default {
     left: -50% !important;
 }
 
-.search-bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 1rem;
-}
 
 .profile-img {
     width: 50px;
@@ -115,6 +120,11 @@ export default {
 }
 
 @media screen and (max-width: 991px) {
+
+    .search-bar {
+        margin-left: 0;
+    }   
+
     .dropdown {
         display: flex;
         align-items: flex-start;
