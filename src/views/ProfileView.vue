@@ -22,4 +22,14 @@ export default {
 	},
 }
 </script>
+
+<style>
+
+.profile {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+</style>
   

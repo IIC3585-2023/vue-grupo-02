@@ -3,13 +3,11 @@
     <title>Pokedex</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
-  <div clas="app">
+  <div id="app">
     <NavBar/>
-    <div class="main-container">
-      <router-view v-if="!loading"/>
-      <div v-if="loading" class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
+    <router-view v-if="!loading"/>
+    <div v-if="loading" class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
     </div>
     <FooterComponent/>
   </div>
@@ -65,23 +63,12 @@ export default {
 </script>
 
 <style>
-.main-container {
+#app {
   font-family: 'Poppins';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 80vh;
-  min-width: 100vw;
-  padding: 1rem;
-}
-
-.app {
-  display: flex;
-  flex-direction: column;
-  min-height: 90vh;
+  min-height: 100vh;
 }
 </style>
