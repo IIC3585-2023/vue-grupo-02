@@ -20,12 +20,14 @@
                 <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
                 </li>
-                <li class="nav-item search-bar">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <li class="nav-item search-bar" @submit.prevent="searchPokemon">
+                    <form>
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" v-model="search">
+                    </form>
                 </li>
                 <li v-if="user && !loading" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img :src="user.photoURL" alt="Profile" class="profile-img">
+                        <img :src="computedPhotoURL" alt="Profile" class="profile-img">
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" @click="redirect('profile')">Profile</a></li>
@@ -48,6 +50,11 @@
 import { mapState, mapActions } from 'vuex';
 export default {
   name: 'NavBar',
+  data() {
+    return {
+      search: '',
+    };
+  },
   methods: {
 		...mapActions(['signIn', 'signOut']),
 		async login() {
@@ -59,10 +66,16 @@ export default {
 		},
 		redirect(componentName, props={}) {
 			this.$router.push({ name: componentName, props })
-		}
+		},
+        searchPokemon() {
+            this.$router.push({ name: 'pokemon', params: { id: this.search }})
+        }
 	},
 	computed: {
 		...mapState(['user', 'loading']),
+        computedPhotoURL() {
+            return this.user.photoURL
+        }
 	},
 };
 

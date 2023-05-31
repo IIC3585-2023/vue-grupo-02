@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 export class PokeApiRequester {
   constructor() {
     this.PokeApiRequester = axios.create({
@@ -12,14 +11,19 @@ export class PokeApiRequester {
     return response.data.results;
   }
 
-  async getPokemonDetail(id) {
-    const response = await this.PokeApiRequester.get(`/pokemon/${id}`);
-    return response.data;
-  }
-
-  async getPokemonDetailByName(name) {
-    const response = await this.PokeApiRequester.get(`/pokemon/${name}`);
-    return response.data;
+  async getPokemonDetails(id) {
+    try {
+      const statsResponse = await this.PokeApiRequester.get(`/pokemon/${id}`);
+      const descriptionResponse = await this.PokeApiRequester.get(`/pokemon-species/${id}`);
+      const response = {
+        stats: statsResponse.data,
+        description: descriptionResponse.data
+      }
+      return response;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   }
 
   async getPokemonPages() {

@@ -1,15 +1,14 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
     <h1>Home</h1>
     <div>
-      <PokemonCard v-for="pokemon in pokemons" v-bind:key="pokemon.id" :pokemon="pokemon"/>
+      <PokemonCardApi v-for="pokemon in pokemons" v-bind:key="pokemon.id" :pokemon="pokemon"/>
     </div>
   </div>
 </template>
 
 <script>
-import PokemonCard from '@/components/PokemonCardApi.vue';
+import PokemonCardApi from '@/components/PokemonCardApi.vue';
 import {PokeApiRequester} from '@/integrations/apiRequester.js';
 
 
@@ -22,10 +21,10 @@ export default {
   methods: {
     async getPokemons() {
       const apiRequester = new PokeApiRequester();
-      var pokemons = await apiRequester.getPokemons();
+      const pokemons = await apiRequester.getPokemons();
       for (let i = 0; i < pokemons.length; i++) {
         const pokemon = pokemons[i];
-        const pokemonData = await apiRequester.getPokemonDetailByName(pokemon.name);
+        const pokemonData = await apiRequester.getPokemonDetails(pokemon.name);
         pokemons[i] = pokemonData;
       }
       this.pokemons = pokemons;
@@ -36,7 +35,7 @@ export default {
   },
   name: 'HomeView',
   components: {
-    PokemonCard,
+    PokemonCardApi,
   }
 }
 </script>

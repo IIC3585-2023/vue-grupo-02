@@ -1,5 +1,8 @@
 import { createStore } from 'vuex'
 import { browserLocalPersistence, setPersistence, getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
+import { setDoc, doc } from 'firebase/firestore'
+import db from '@/integrations/firebase';
+
 export default createStore({
   state: {
     loading: false,
@@ -17,8 +20,19 @@ export default createStore({
     },
     setTeam(state, payload) {
       state.team = payload;
-    }
-
+    },
+    addToTeam(state, payload) {
+      const pokemon = {
+        id: payload.pokemon.stats.id,
+        name: payload.pokemon.stats.name,
+        imgURL: payload.pokemon.stats.sprites.other['official-artwork'].front_default,
+        description: payload.pokemon.description.flavor_text_entries.find((entry) => entry.language.name === 'en').flavor_text,
+      }
+      console.log(pokemon);
+      state.team[payload.index] = pokemon;
+      const ref = doc(db, 'users', state.user.uid);
+      setDoc(ref, { team: state.team }, { merge: true });
+    },
   },
   actions: {
     async signIn(context) {

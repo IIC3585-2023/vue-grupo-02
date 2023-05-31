@@ -12,10 +12,10 @@ import PokemonCard from '@/components/PokemonCard.vue'
 export default {
 	name: 'TeamCard',
 	components: {
-			PokemonCard
+		PokemonCard
 	},
 	computed: {
-			...mapState(['team'])
+		...mapState(['team'])
 	},
 }
 </script>
