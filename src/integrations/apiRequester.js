@@ -26,9 +26,17 @@ export class PokeApiRequester {
     }
   }
 
-  async getPokemonPages() {
-    const response = await this.PokeApiRequester.get('/pokemon');
-    return response.data.pages;
+  async getPokemonPages(page) {
+    try{
+      const offset = (page - 1) * 20;
+      const request = `/pokemon?offset=${offset}&limit=20`;
+      const response = await this.PokeApiRequester.get(request);
+      return response.data.results;
+    }catch(error){
+      console.log(error);
+      return null;
+    }
+  
   }
 
 
