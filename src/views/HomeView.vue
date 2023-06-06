@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
+    <h1>Pokemons</h1>
     <div id="Cards">
       <PokemonCardHome v-for="pokemon in pokemons" v-bind:key="pokemon.id" :pokemon="pokemon"/>
     </div>
@@ -71,13 +71,12 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
 }
 #Cards {
   display: flex;
   flex-wrap: wrap;
   gap: 3%;
-  margin-top: 1%;
+  justify-content: center;
 }
 
 </style>

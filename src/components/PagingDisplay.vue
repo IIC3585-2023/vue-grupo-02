@@ -19,8 +19,8 @@
 }
 
 .paging-img {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
     margin: 0.5rem;
     cursor: pointer;
     background-color: #9fd0cc;
