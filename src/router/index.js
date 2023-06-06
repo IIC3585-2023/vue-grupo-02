@@ -8,7 +8,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
   },
   {
     path: '/profile',
@@ -22,6 +22,7 @@ const routes = [
     component: PokemonView,
     props: route => ({ identifier: route.params.id })
   },
+
 
 ]
 
