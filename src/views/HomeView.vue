@@ -75,7 +75,7 @@ export default {
 #Cards {
   display: flex;
   flex-wrap: wrap;
-  gap: 3%;
+  gap: 1rem;
   justify-content: center;
 }
 

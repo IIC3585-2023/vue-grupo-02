@@ -40,6 +40,7 @@ export default {
     ...mapState(['user', 'team', 'loading'])
   },
   created() {
+    document.title = 'Pokedex';
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       this.setLoading(true);

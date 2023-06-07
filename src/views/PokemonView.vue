@@ -44,7 +44,7 @@
 					</div>
 				</div>
 		</div>
-		<div class="container-body">
+		<div v-if="user" class="container-body">
 			<div class="btn btn-primary" @click="showTeamModal"> Add to team</div>
 		</div>
 		<TeamModal :show="showModal" @close="closeTeamModal" @select="addPokemon"/>

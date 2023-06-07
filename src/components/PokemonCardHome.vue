@@ -29,6 +29,10 @@ export default {
 }
 </script>
 <style scoped>
+
+.card {
+  min-height: 32rem;
+}
 .card-text {
   text-transform: capitalize;
 }

@@ -18,20 +18,19 @@
                 <a class="nav-link active" aria-current="page" @click="redirect('home')">Home</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="https://github.com/IIC3585-2023/vue-grupo-02">Source</a>
                 </li>
                 <li class="nav-item search-bar" @submit.prevent="searchPokemon">
                     <form>
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" v-model="search">
                     </form>
                 </li>
-                <li v-if="user && !loading" class="nav-item dropdown">
+                <li v-if="user" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img :src="computedPhotoURL" alt="Profile" class="profile-img">
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" @click="redirect('profile')">Profile</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" @click="logout">Log Out</a></li>
                     </ul>
