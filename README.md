@@ -1,4 +1,6 @@
-# tarea-5
+# Tarea 5 Vue - Grupo 2
+Tarea desarrollada utilizando el framework Vue.js como frontend y Firebase como base de datos y autenticador.
+Disponible en: https://spontaneous-syrniki-fc8a2d.netlify.app/
 
 ## Project setup
 ```
@@ -19,6 +21,3 @@ yarn build
 ```
 yarn lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
